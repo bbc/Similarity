@@ -1,9 +1,9 @@
 class Document
-  attr_reader :content
+  attr_reader :content, :term_frequency
 
   def initialize(text)
     @content = text
-    @term_frequency = {}
+    @term_frequency = nil
     @terms = nil
   end
 
@@ -14,6 +14,10 @@ class Document
   end
 
   def term_frequency
+    @term_frequency ||= calculate_term_frequency
+  end
+
+  def calculate_term_frequency
     tf = {}
     terms.each do |term|
       if tf[term]
