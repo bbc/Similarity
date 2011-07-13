@@ -29,15 +29,7 @@ class Corpus
     end
   end
 
-  def terms_list
-    terms_list = []
-    @terms.each_pair do |term, count|
-      terms_list << term
-    end
-    terms_list
-  end
-
   def similarity(document1, document2)
-    vector_space(document1).similarity(vector_space(document2))
+    document1.vector_space(self).similarity(document2.vector_space(self))
   end
 end
