@@ -46,4 +46,16 @@ class TestCorpus < Test::Unit::TestCase
     # There's 2 documents and the term appears in 0, so idf = log(2/1) = 0.69314718056
     assert_in_delta corpus.inverse_document_frequency("bird"), 0.693, 0.001
   end
+
+  # Test using worked example from logbook
+  def test_similarity
+    corpus = Corpus.new
+    doc1 = Document.new("cow horse sheep")
+    doc2 = Document.new("horse bird dog")
+
+    corpus << doc1
+    corpus << doc2
+
+    assert_equal 1, corpus.similarity(doc1, doc2)
+  end
 end
