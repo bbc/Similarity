@@ -6,11 +6,15 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    faker (0.9.5)
+      i18n (~> 0.4)
+    i18n (0.6.0)
     rake (0.8.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  faker
   rake
   tf-idf!

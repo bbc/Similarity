@@ -19,4 +19,5 @@ EOT
   s.summary = %q{Document similarity calculations using cosine similarity and TF-IDF weights}
 
   s.add_development_dependency "rake"
+  s.add_development_dependency "faker"
 end
