@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    tf-idf (0.1.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    rake (0.8.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rake
+  tf-idf!
