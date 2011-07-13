@@ -10,9 +10,9 @@ class Corpus
     @document_count += 1
     document.terms.uniq.each do |term|
       if @terms[term]
-        @terms[term][:count] += 1
+        @terms[term] += 1
       else
-        @terms[term] = {:count => 1}
+        @terms[term] = 1
       end
     end
   end
@@ -24,7 +24,7 @@ class Corpus
 
   def document_count_for_term(term)
     if @terms[term]
-      @terms[term][:count]
+      @terms[term]
     else
       0
     end

@@ -23,13 +23,13 @@ class TestCorpus < Test::Unit::TestCase
     assert_equal 3, corpus.terms.size
 
     # cow appears in one document
-    assert_equal 1, corpus.terms['cow'][:count]
+    assert_equal 1, corpus.terms['cow']
 
     # horse appears in one document
-    assert_equal 1, corpus.terms['horse'][:count]
+    assert_equal 1, corpus.terms['horse']
 
     # bird appears in both documents
-    assert_equal 2, corpus.terms['bird'][:count]
+    assert_equal 2, corpus.terms['bird']
   end
 
   def test_inverse_document_frequency
