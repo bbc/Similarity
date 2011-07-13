@@ -1,4 +1,4 @@
-class VectorCalculations
+module VectorCalculations
   # http://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html
   def self.cosine_similarity(vector1, vector2)
     (dot_product(vector1, vector2)) /
