@@ -4,6 +4,12 @@ require 'benchmark'
 
 require_relative '../lib/tf-idf'
 
+# Perform a benchmark of calculating the whole similarity matrix for a
+# corpus of N documents. This isn't a great benchmark since
+# Faker::Lorem generates random text from a fixed set of words
+# (therefore the total number of terms in the corpus is small), but
+# it's a start.
+
 def calculate_similarites(number_of_documents)
   corpus = Corpus.new
 
