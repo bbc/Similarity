@@ -44,6 +44,6 @@ class Corpus
     end
 
     # calculate cosine_similarity between the two vector spaces
-    Array.cosine_similarity(document1_vector_space, document2_vector_space)
+    VectorCalculations.cosine_similarity(document1_vector_space, document2_vector_space)
   end
 end
