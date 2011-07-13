@@ -10,7 +10,7 @@ class TestVectorSpace < Test::Unit::TestCase
     vector1 = [0,1]
     vector2 = [1,1]
 
-    similarity = vector1.similarity(vector2)
+    similarity = Array.cosine_similarity(vector1, vector2)
     assert_equal (1/Math.sqrt(2)), similarity
   end
 end

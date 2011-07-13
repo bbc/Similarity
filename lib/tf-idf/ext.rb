@@ -1,8 +1,8 @@
 class Array
-
   # http://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html
-  def similarity(other_array)
-    (self.dot_product(other_array)) / (self.abs * other_array.abs).to_f
+  def self.cosine_similarity(array1, array2)
+    (array1.dot_product(array2)) /
+      (array1.abs * array2.abs).to_f
   end
 
   def abs
