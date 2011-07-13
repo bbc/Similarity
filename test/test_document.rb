@@ -26,18 +26,28 @@ class TestDocument < Test::Unit::TestCase
     assert_equal document.terms, ["the", "quick", "brown", "fox"]
   end
 
-  def test_term_frequency
+  def test_term_frequencies
     document = Document.new('cow cow cow horse horse elephant')
-    assert document.term_frequency.is_a? Hash
+    assert document.term_frequencies.is_a? Hash
 
     # should have 3 terms
-    assert_equal document.term_frequency.size, 3
+    assert_equal document.term_frequencies.size, 3
 
     # frequency of cow should be 3/6 = 0.5
-    assert_equal document.term_frequency['cow'], 0.5
+    assert_equal document.term_frequencies['cow'], 0.5
 
     # frequency of horse should be 2/6 = 0.333333333333
-    assert_in_delta document.term_frequency['horse'], 0.333, 0.001
+    assert_in_delta document.term_frequencies['horse'], 0.333, 0.001
+  end
+
+  def test_term_frequency
+    document = Document.new('cow cow cow horse horse elephant')
+
+    # frequency of cow should be 3/6 = 0.5
+    assert_equal document.term_frequency('cow'), 0.5
+
+    # frequency of sheep should be 0
+    assert_equal document.term_frequency('sheep'), 0
   end
 
   def test_has_term

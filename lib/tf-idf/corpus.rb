@@ -32,25 +32,15 @@ class Corpus
 
   def similarity(document1, document2)
     # find the terms contained in both documents
-    common_terms = document1.term_frequency.keys | document2.term_frequency.keys
+    common_terms = document1.term_frequencies.keys | document2.term_frequencies.keys
 
     # vector space for documents
     document1_vector_space = []
     document2_vector_space = []
     common_terms.each do |term|
       idf = inverse_document_frequency(term)
-      if tf = document1.term_frequency[term]
-        puts "#{tf} * #{idf}" if $DEBUG
-        document1_vector_space << (tf * idf)
-      else
-        document1_vector_space << 0
-      end
-
-      if document2.term_frequency[term]
-        document2_vector_space << (document2.term_frequency[term] * idf)
-      else
-        document2_vector_space << 0
-      end
+      document1_vector_space << (document1.term_frequency(term) * idf)
+      document2_vector_space << (document2.term_frequency(term) * idf)
     end
 
     # calculate cosine_similarity between the two vector spaces
