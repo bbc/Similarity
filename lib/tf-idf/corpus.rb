@@ -29,20 +29,6 @@ class Corpus
     end
   end
 
-  def vector_space(document)
-    vector_space = []
-    vector_space_index = 0
-    @terms.each_pair do |term, count|
-      if document.has_term?(term)
-        vector_space[vector_space_index] = document.term_frequency[term] * self.inverse_document_frequency(term)
-      else
-        vector_space[vector_space_index] = 0
-      end
-      vector_space_index += 1
-    end
-    vector_space
-  end
-
   def terms_list
     terms_list = []
     @terms.each_pair do |term, count|

@@ -26,6 +26,20 @@ class Document
     tf.each_pair { |k,v| tf[k] = (tf[k] / total_number_of_terms) }
   end
 
+  def vector_space(corpus)
+    vector_space = []
+    vector_space_index = 0
+    corpus.terms.each_pair do |term, count|
+      if has_term?(term)
+        vector_space[vector_space_index] = term_frequency[term] * corpus.inverse_document_frequency(term)
+      else
+        vector_space[vector_space_index] = 0
+      end
+      vector_space_index += 1
+    end
+    vector_space
+  end
+
   def has_term?(term)
     terms.include? term
   end
