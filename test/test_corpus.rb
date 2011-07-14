@@ -58,4 +58,18 @@ class TestCorpus < Test::Unit::TestCase
 
     assert_equal 1, corpus.similarity(doc1, doc2)
   end
+
+  def test_similarity_returns_weights
+    corpus = Corpus.new
+    doc1 = Document.new("cow horse sheep")
+    doc2 = Document.new("horse bird dog")
+
+    corpus << doc1
+    corpus << doc2
+
+    similarity, doc1_weights, doc2_weights = corpus.similarity(doc1, doc2, include_weights = true)
+    assert_equal 1, similarity
+    assert doc1_weights.has_key? "cow"
+    assert doc2_weights.has_key? "bird"
+  end
 end
