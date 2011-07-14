@@ -2,9 +2,13 @@ class Document
   attr_reader :content
 
   def initialize(text)
-    @content = text
-    @term_frequency = nil
-    @terms = nil
+    if text && !text.empty?
+      @content = text
+      @term_frequency = nil
+      @terms = nil
+    else
+      raise ArgumentError, "text cannot be nil or blank"
+    end
   end
 
   def terms

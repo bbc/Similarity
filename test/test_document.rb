@@ -6,6 +6,14 @@ class TestDocument < Test::Unit::TestCase
     assert_equal document.content, "The quick brown fox"
   end
 
+  def test_initialize_with_nil
+    assert_raise(ArgumentError) { Document.new(nil) }
+  end
+
+  def test_initialize_with_blank
+    assert_raise(ArgumentError) { Document.new("") }
+  end
+
   def test_term_extraction
     document = Document.new("the quick brown fox")
     assert_equal document.terms, ["the", "quick", "brown", "fox"]
