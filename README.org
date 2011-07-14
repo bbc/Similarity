@@ -1,0 +1,45 @@
+* TF-IDF
+
+** Overview
+
+A Ruby library for calculating the similarity between pieces of text
+using a [[http://en.wikipedia.org/wiki/Tf%25E2%2580%2593idf][Term Frequency-Inverse Document Frequency]] method.
+
+A [[http://en.wikipedia.org/wiki/Bag_of_words_model][bag of words]] model is used. Terms in the source documents are
+downcased and punctuation is removed, but stemming is not currently
+implemented.
+
+The library is written in pure-ruby for portability, and has not been
+rigorously optimised. I'd be interested in any comments, suggestions
+and patches for how to improve performance.
+
+** Usage
+
+#+begin_src ruby
+require 'tf-idf'
+
+corpus = Corpus.new
+
+doc1 = Document.new("Broad powers for hacking inquiry")
+doc2 = Document.new("UK unemployment level falls again")
+doc3 = Document.new("NI riots leads to 26 arrests")
+
+corpus << doc1
+corpus << doc2
+corpus << doc3
+
+similarity = corpus.similarity(doc1, doc2)
+#+end_src ruby
+
+For more examples, see the =examples= directory.
+
+** Todo
+- Performance improvements (probably in the calculation of similarity)
+- (Optional) stemming of source terms
+
+** Contributing
+- Fork the project
+- Send a pull request
+- Don't touch the .gemspec, I'll do that when I release a new version
+
+
