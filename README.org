@@ -9,6 +9,12 @@ A [[http://en.wikipedia.org/wiki/Bag_of_words_model][bag of words]] model is use
 downcased and punctuation is removed, but stemming is not currently
 implemented.
 
+This library was written to facilitate the creation of diagrams talked
+about by Jonathan Stray in his [[http://jonathanstray.com/a-full-text-visualization-of-the-iraq-war-logs][full-text visualization of the Iraq War
+Logs]] post. An example of how to generate a [[http://gephi.org/][Gephi]] compatible file
+including labelling of nodes with key words is included in the
+=examples= directory.
+
 The library is written in pure-ruby for portability, and has not been
 rigorously optimised. I'd be interested in any comments, suggestions
 and patches for how to improve performance.
