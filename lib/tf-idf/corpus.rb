@@ -35,20 +35,24 @@ class Corpus
     common_terms = document1.term_frequencies.keys | document2.term_frequencies.keys
 
     # vector space for documents
-    document1_vector_space = []
-    document2_vector_space = []
-    document1_weights = {}
-    document2_weights = {}
+    document1_vector_space = []; document2_vector_space = []
+
+    # hash to store the weights
+    document1_weights = {}; document2_weights = {}
+
     common_terms.each do |term|
       idf = inverse_document_frequency(term)
 
       document1_weight = document1.term_frequency(term) * idf
-      document1_weights[term] = document1_weight
-      document1_vector_space << (document1_weight)
+      document1_vector_space << document1_weight
 
       document2_weight = document2.term_frequency(term) * idf
-      document2_weights[term] = document2_weight
-      document2_vector_space << (document2_weight)
+      document2_vector_space << document2_weight
+
+      if include_weights
+        document1_weights[term] = document1_weight
+        document2_weights[term] = document2_weight
+      end
     end
 
     # calculate cosine_similarity between the two vector spaces
