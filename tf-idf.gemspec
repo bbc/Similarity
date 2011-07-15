@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 Pure-ruby document similarity calculations using cosine similarity and TF-IDF weights
 EOT
   s.email = %q{chris.lowis@bbc.co.uk}
-  s.files = Dir["lib/**"]
+  s.files = Dir["lib/**/*"]
   s.has_rdoc = false
   s.homepage = %q{}
   s.require_paths = ["lib"]
