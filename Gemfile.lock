@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tf-idf (0.1.0)
+    similarity (0.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -19,4 +19,4 @@ DEPENDENCIES
   faker
   rake
   ruby-graphviz
-  tf-idf!
+  similarity!
