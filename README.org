@@ -40,7 +40,8 @@ similarity = corpus.similarity(doc1, doc2)
 For more examples, see the =examples= directory.
 
 ** Todo
-- Performance improvements (probably in the calculation of similarity)
+- Performance improvements
+  - Switch to storing document vector spaces in sparse form, using linalg?
 - (Optional) stemming of source terms
 
 ** Contributing
