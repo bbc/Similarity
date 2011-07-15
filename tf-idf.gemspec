@@ -20,4 +20,5 @@ EOT
 
   s.add_development_dependency "rake"
   s.add_development_dependency "faker"
+  s.add_development_dependency "ruby-graphviz"
 end
