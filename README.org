@@ -22,7 +22,7 @@ and patches for how to improve performance.
 ** Usage
 
 #+begin_src ruby
-require 'tf-idf'
+require 'similarity'
 
 corpus = Corpus.new
 

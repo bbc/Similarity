@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-require_relative '../lib/tf-idf'
+require_relative '../lib/similarity'
 
 # First we define a corpus to hold the documents
 corpus = Corpus.new

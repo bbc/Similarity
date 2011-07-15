@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-require_relative '../lib/tf-idf'
+require_relative '../lib/similarity'
 require 'rubygems'
 require 'graphviz'
 
@@ -9,7 +9,7 @@ This example shows how to generate diagrams such as those produced by
 Stray and Burgess in:
 http://jonathanstray.com/a-full-text-visualization-of-the-iraq-war-logs
 
-It uses the Ruby Graphviz library and the tf-idf gem
+It uses the Ruby Graphviz library and the similarity gem
 =end
 
 # First we define a corpus to hold the documents
