@@ -2,6 +2,7 @@ require 'rubygems'
 require 'faker'
 require 'benchmark'
 
+$:.unshift('../lib/')
 require_relative '../lib/similarity'
 
 # Perform a benchmark of calculating the whole similarity matrix for a
@@ -22,12 +23,7 @@ def calculate_similarites(number_of_documents)
     corpus << document
   end
 
-  # Calculate the similarity between every document
-  documents.each do |doc1|
-    documents.each do |doc2|
-      corpus.similarity(doc1, doc2)
-    end
-  end
+  corpus.similarity_matrix
 end
 
 def time_method(n=1, &blk)
