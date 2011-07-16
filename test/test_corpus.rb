@@ -47,6 +47,19 @@ class TestCorpus < Test::Unit::TestCase
     assert_in_delta corpus.inverse_document_frequency("bird"), 0.693, 0.001
   end
 
+  def test_similarity_matrix
+    corpus = Corpus.new
+    doc1 = Document.new("cow horse sheep")
+    doc2 = Document.new("horse bird dog")
+
+    corpus << doc1
+    corpus << doc2
+
+    matrix = corpus.similarity_matrix
+    assert_in_delta 1, matrix[0,0], 0.1
+    assert_in_delta 1, matrix[0,1], 0.1
+  end
+
   # Test using worked example from logbook
   def test_similarity
     corpus = Corpus.new
