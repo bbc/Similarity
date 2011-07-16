@@ -47,6 +47,7 @@ class TestCorpus < Test::Unit::TestCase
     assert_in_delta corpus.inverse_document_frequency("bird"), 0.693, 0.001
   end
 
+  # using worked example from log book, this should return a similarity of 1
   def test_similarity_matrix
     corpus = Corpus.new
     doc1 = Document.new("cow horse sheep")
@@ -58,31 +59,5 @@ class TestCorpus < Test::Unit::TestCase
     matrix = corpus.similarity_matrix
     assert_in_delta 1, matrix[0,0], 0.1
     assert_in_delta 1, matrix[0,1], 0.1
-  end
-
-  # Test using worked example from logbook
-  def test_similarity
-    corpus = Corpus.new
-    doc1 = Document.new("cow horse sheep")
-    doc2 = Document.new("horse bird dog")
-
-    corpus << doc1
-    corpus << doc2
-
-    assert_equal 1, corpus.similarity(doc1, doc2)
-  end
-
-  def test_similarity_returns_weights
-    corpus = Corpus.new
-    doc1 = Document.new("cow horse sheep")
-    doc2 = Document.new("horse bird dog")
-
-    corpus << doc1
-    corpus << doc2
-
-    similarity, doc1_weights, doc2_weights = corpus.similarity(doc1, doc2, include_weights = true)
-    assert_equal 1, similarity
-    assert doc1_weights.has_key? "cow"
-    assert doc2_weights.has_key? "bird"
   end
 end
