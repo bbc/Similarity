@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-require_relative '../lib/similarity'
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'similarity'
 
 # First we define a corpus to hold the documents
 corpus = Corpus.new
@@ -35,6 +36,6 @@ end
 # Print a list of unique terms extracted from the documents
 puts corpus.terms
 
-# Calculate the similarity between two documents
-puts corpus.similarity(documents[1], documents[4])
+# Calculate the similarity matrix between all the documents
+puts corpus.similarity_matrix
 

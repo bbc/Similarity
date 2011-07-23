@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-require_relative '../lib/similarity'
 require 'rubygems'
 require 'graphviz'
+
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'similarity'
 
 =begin
 
@@ -49,27 +51,27 @@ puts "Total number of tems in the corpus: #{corpus.terms.size}"
 # Generate a GraphViz graph to hold the results
 g = GraphViz.new( :G, :type => :graph )
 
-# A small function to return the n largest entries in a hash by
-# value. We'll use this to label our nodes in the final graph.
-def n_largest_values(hash, n=3)
-  sorted_hash = hash.sort_by { |k,v| v }.reverse
-  sorted_hash[0..n-1].map{ |e| e[0] }
-end
+# Calculate the similarity matrix
+similarity_matrix = corpus.similarity_matrix
 
 # Calculate the similarity pairs between all the documents
 documents.each_with_index do |doc1, index1|
   documents.each_with_index do |doc2, index2|
     if index1 > index2 # we only need to calculate each pair once
 
-      # Calculate the similarity and return the weights
-      similarity, doc1_weights, doc2_weights = corpus.similarity(doc1, doc2, include_weights = true)
+      # The similarity between doc1 and doc2
+      similarity = similarity_matrix[index1, index2]
+
+      # The top three weighted terms are used as labels
+      doc1_weights = corpus.weights(doc1)
+      doc2_weights = corpus.weights(doc2)
 
       # create the nodes, label them and add an edge with a weight
       # equal to the similarity. We'll include all the nodes as this
       # is a small graph, but you may want to set a threshold on
       # similarity.
-      node1_label = n_largest_values(doc1_weights).join(" ")
-      node2_label = n_largest_values(doc1_weights).join(" ")
+      node1_label =  doc1_weights[0..2].map {|pair| pair.first}.join(" ")
+      node2_label =  doc2_weights[0..2].map {|pair| pair.first}
 
       node1 = g.add_node( doc1.object_id.to_s, "label" => "#{node1_label}" )
       node2 = g.add_node( doc2.object_id.to_s, "label" => "#{node2_label}" )

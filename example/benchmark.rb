@@ -1,9 +1,8 @@
 require 'rubygems'
 require 'faker'
-require 'benchmark'
 
-$:.unshift('../lib/')
-require_relative '../lib/similarity'
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'similarity'
 
 # Perform a benchmark of calculating the whole similarity matrix for a
 # corpus of N documents. This isn't a great benchmark since
