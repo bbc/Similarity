@@ -42,20 +42,6 @@ class Document
     end
   end
 
-  def vector_space(corpus)
-    vector_space = []
-    vector_space_index = 0
-    corpus.terms.each_pair do |term, count|
-      if has_term?(term)
-        vector_space[vector_space_index] = term_frequencies[term] * corpus.inverse_document_frequency(term)
-      else
-        vector_space[vector_space_index] = 0
-      end
-      vector_space_index += 1
-    end
-    vector_space
-  end
-
   def has_term?(term)
     terms.include? term
   end

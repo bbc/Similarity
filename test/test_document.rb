@@ -64,17 +64,4 @@ class TestDocument < Test::Unit::TestCase
     assert_equal true, document.has_term?('cow')
     assert_equal false, document.has_term?('sheep')
   end
-
-  def test_vector_space
-    corpus = Corpus.new
-    doc1 = Document.new("cow cow cow")
-    doc2 = Document.new("cow horse bird sheep")
-
-    corpus << doc1
-    corpus << doc2
-
-    vector_space = doc1.vector_space(corpus)
-    assert_in_delta -0.405, vector_space[0], 0.001
-    assert_equal [0, 0, 0], vector_space[1..3]
-  end
 end
