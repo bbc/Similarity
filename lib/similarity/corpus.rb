@@ -6,6 +6,7 @@ class Corpus
   def initialize
     @terms = {}
     @documents = []
+    @vector_space_matrix = nil
   end
 
   def document_count
@@ -37,18 +38,40 @@ class Corpus
   end
 
   def similarity_matrix
-    matrix = GSL::Matrix.alloc(@terms.size, document_count)
+    vector_space_matrix.transpose * vector_space_matrix
+  end
 
-    @documents.each_with_index do |document, document_index|
-      @terms.each_with_index do |term, term_index|
-        term = term[0]
-        idf = inverse_document_frequency(term)
-        weight = document.term_frequency(term) * idf
-        matrix[term_index, document_index] = weight
+  def vector_space_matrix
+    if @vector_space_matrix
+      return @vector_space_matrix
+    else
+      @vector_space_matrix = GSL::Matrix.alloc(@terms.size, document_count)
+
+      @documents.each_with_index do |document, document_index|
+        @terms.each_with_index do |term, term_index|
+          term = term.first
+          idf = inverse_document_frequency(term)
+          weight = document.term_frequency(term) * idf
+          @vector_space_matrix[term_index, document_index] = weight
+        end
       end
-    end
 
-    matrix.each_col { |col| col.div!(col.norm) }
-    matrix.transpose * matrix
+      @vector_space_matrix.each_col { |col| col.div!(col.norm) }
+    end
+  end
+
+  def weights(document)
+    idx = @documents.index(document)
+    terms = @terms.to_a.map {|term| term.first}
+    weights = vector_space_matrix.col(idx).to_a
+
+    # create array of array pairs of terms and weights
+    term_weight_pairs = terms.zip(weights)
+
+    # remove zero weights
+    term_weight_pairs.reject! {|pair| pair[1].zero?}
+
+    # sort in descending order
+    term_weight_pairs.sort {|x,y| y[1] <=> x[1]}
   end
 end
