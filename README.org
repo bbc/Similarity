@@ -10,14 +10,16 @@ downcased and punctuation is removed, but stemming is not currently
 implemented.
 
 This library was written to facilitate the creation of diagrams talked
-about by Jonathan Stray in his [[http://jonathanstray.com/a-full-text-visualization-of-the-iraq-war-logs][full-text visualization of the Iraq War
-Logs]] post. An example of how to generate a [[http://gephi.org/][Gephi]] compatible file
-including labelling of nodes with key words is included in the
-=examples= directory.
+about by Jonathan Stray in his
+[[http://jonathanstray.com/a-full-text-visualization-of-the-iraq-war-logs][full-text
+visualization of the Iraq War Logs]] post. An example of how to
+generate a [[http://gephi.org/][Gephi]] compatible file including labelling of nodes with key
+words is included in the =examples= directory.
 
-The library is written in pure-ruby for portability, and has not been
-rigorously optimised. I'd be interested in any comments, suggestions
-and patches for how to improve performance.
+The library depends on the [[http://www.gnu.org/software/gsl/][GNU Scientific Library]], and the [[http://rb-gsl.rubyforge.org/][gsl ruby
+gem]] but does not use sparse matrix representations to speed up the
+calculations, since there is no support for them in the GSL. I am
+currently looking into fixing this, and would appreciate any help!
 
 ** Usage
 
@@ -25,21 +27,17 @@ and patches for how to improve performance.
 :
 : corpus = Corpus.new
 :
-: doc1 = Document.new("Broad powers for hacking inquiry")
-: doc2 = Document.new("UK unemployment level falls again")
-: doc3 = Document.new("NI riots leads to 26 arrests")
+: corpus << Document.new("Broad powers for hacking inquiry")
+: corpus << Document.new("UK unemployment level falls again")
+: corpus << Document.new("NI riots leads to 26 arrests")
 :
-: corpus << doc1
-: corpus << doc2
-: corpus << doc3
-:
-: similarity = corpus.similarity(doc1, doc2)
+: similarity_matrix = corpus.similarity_matrix
 
 For more examples, see the =examples= directory.
 
 ** Todo
 - Performance improvements
-  - Switch to storing document vector spaces in sparse form, using linalg?
+  - Switch to storing document vector spaces in sparse form, using linalg or csparse?
 - (Optional) stemming of source terms
 
 ** Contributing
