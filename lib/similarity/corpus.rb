@@ -6,7 +6,7 @@ class Corpus
   def initialize
     @terms = {}
     @documents = []
-    @vector_space_matrix = nil
+    @term_document_matrix = nil
   end
 
   def document_count
@@ -38,32 +38,32 @@ class Corpus
   end
 
   def similarity_matrix
-    vector_space_matrix.transpose * vector_space_matrix
+    term_document_matrix.transpose * term_document_matrix
   end
 
-  def vector_space_matrix
-    if @vector_space_matrix
-      return @vector_space_matrix
+  def term_document_matrix
+    if @term_document_matrix
+      return @term_document_matrix
     else
-      @vector_space_matrix = GSL::Matrix.alloc(@terms.size, document_count)
+      @term_document_matrix = GSL::Matrix.alloc(@terms.size, document_count)
 
       @documents.each_with_index do |document, document_index|
         @terms.each_with_index do |term, term_index|
           term = term.first
           idf = inverse_document_frequency(term)
           weight = document.term_frequency(term) * idf
-          @vector_space_matrix[term_index, document_index] = weight
+          @term_document_matrix[term_index, document_index] = weight
         end
       end
 
-      @vector_space_matrix.each_col { |col| col.div!(col.norm) }
+      @term_document_matrix.each_col { |col| col.div!(col.norm) }
     end
   end
 
   def weights(document)
     idx = @documents.index(document)
     terms = @terms.to_a.map {|term| term.first}
-    weights = vector_space_matrix.col(idx).to_a
+    weights = term_document_matrix.col(idx).to_a
 
     # create array of array pairs of terms and weights
     term_weight_pairs = terms.zip(weights)
