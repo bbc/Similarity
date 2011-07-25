@@ -21,6 +21,18 @@ gem]] but does not use sparse matrix representations to speed up the
 calculations, since there is no support for them in the GSL. I am
 currently looking into fixing this, and would appreciate any help!
 
+** Dependencies
+
+Similarity depends on the [[http://www.gnu.org/software/gsl/][GNU Scientific Library]], and the [[http://rb-gsl.rubyforge.org/][gsl ruby
+gem]]. On OSX with [[https://github.com/mxcl/homebrew]] the GSL can be
+installed with
+
+: brew install gsl
+
+The =gsl= gem should then install normally. For other platforms,
+please add the information to the wiki and I'll add them to this
+readme.
+
 ** Usage
 
 : require 'similarity'
