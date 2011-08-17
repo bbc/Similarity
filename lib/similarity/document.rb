@@ -1,9 +1,10 @@
 class Document
   attr_reader :content
 
-  def initialize(text)
-    if text && !text.empty?
-      @content = text
+  def initialize(hash_args)
+    content = hash_args[:content]
+    if content && !content.empty?
+      @content = content
       @term_frequency = nil
       @terms = nil
     else

@@ -3,8 +3,8 @@ require 'helper'
 class TestCorpus < Test::Unit::TestCase
   def test_adding_documents_increments_document_count
     corpus = Corpus.new
-    doc1 = Document.new("cow cow cow")
-    doc2 = Document.new("horse horse horse")
+    doc1 = Document.new(:content => "cow cow cow")
+    doc2 = Document.new(:content => "horse horse horse")
 
     corpus << doc1
     corpus << doc2
@@ -14,8 +14,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_adding_documents_adds_terms
     corpus = Corpus.new
-    doc1 = Document.new("cow cow cow bird")
-    doc2 = Document.new("horse horse horse bird")
+    doc1 = Document.new(:content => "cow cow cow bird")
+    doc2 = Document.new(:content => "horse horse horse bird")
 
     corpus << doc1
     corpus << doc2
@@ -34,8 +34,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_inverse_document_frequency
     corpus = Corpus.new
-    doc1 = Document.new("cow cow cow")
-    doc2 = Document.new("horse horse horse")
+    doc1 = Document.new(:content => "cow cow cow")
+    doc2 = Document.new(:content => "horse horse horse")
 
     corpus << doc1
     corpus << doc2
@@ -49,8 +49,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_weights
     corpus = Corpus.new
-    doc1 = Document.new("cow horse sheep")
-    doc2 = Document.new("horse bird dog")
+    doc1 = Document.new(:content => "cow horse sheep")
+    doc2 = Document.new(:content => "horse bird dog")
 
     corpus << doc1
     corpus << doc2
@@ -60,9 +60,9 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_weights_sorts
     corpus = Corpus.new
-    doc1 = Document.new("Returns a string containing a representation")
-    corpus << Document.new("Adds a string containing a representation")
-    corpus << Document.new("Representation of a string")
+    doc1 = Document.new(:content => "Returns a string containing a representation")
+    corpus << Document.new(:content => "Adds a string containing a representation")
+    corpus << Document.new(:content => "Representation of a string")
 
     corpus << doc1
 
@@ -73,8 +73,8 @@ class TestCorpus < Test::Unit::TestCase
   # using worked example from log book, this should return a similarity of 1
   def test_similarity_matrix
     corpus = Corpus.new
-    doc1 = Document.new("cow horse sheep")
-    doc2 = Document.new("horse bird dog")
+    doc1 = Document.new(:content => "cow horse sheep")
+    doc2 = Document.new(:content => "horse bird dog")
 
     corpus << doc1
     corpus << doc2
