@@ -39,9 +39,9 @@ readme.
 :
 : corpus = Corpus.new
 :
-: corpus << Document.new("Broad powers for hacking inquiry")
-: corpus << Document.new("UK unemployment level falls again")
-: corpus << Document.new("NI riots leads to 26 arrests")
+: corpus << Document.new(:content => "Broad powers for hacking inquiry")
+: corpus << Document.new(:content => "UK unemployment level falls again")
+: corpus << Document.new(:content => "NI riots leads to 26 arrests")
 :
 : similarity_matrix = corpus.similarity_matrix
 

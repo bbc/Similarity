@@ -33,13 +33,9 @@ headlines = [
              "UK charities step up Somalia aid"
             ]
 
-documents = []
 headlines.each do |headline|
   # create a document object from the headline
-  document = Document.new(headline)
-
-  # store the document object for later
-  documents << document
+  document = Document.new(:content => headline)
 
   # add the document to the corpus
   corpus << document
@@ -53,6 +49,8 @@ g = GraphViz.new( :G, :type => :graph )
 
 # Calculate the similarity matrix
 similarity_matrix = corpus.similarity_matrix
+
+documents = corpus.documents
 
 # Calculate the similarity pairs between all the documents
 documents.each_with_index do |doc1, index1|
@@ -73,8 +71,8 @@ documents.each_with_index do |doc1, index1|
       node1_label =  doc1_weights[0..2].map {|pair| pair.first}.join(" ")
       node2_label =  doc2_weights[0..2].map {|pair| pair.first}
 
-      node1 = g.add_node( doc1.object_id.to_s, "label" => "#{node1_label}" )
-      node2 = g.add_node( doc2.object_id.to_s, "label" => "#{node2_label}" )
+      node1 = g.add_node( doc1.id.to_s, "label" => "#{node1_label}" )
+      node2 = g.add_node( doc2.id.to_s, "label" => "#{node2_label}" )
       g.add_edge(node1, node2, "weight" => similarity)
     end
   end

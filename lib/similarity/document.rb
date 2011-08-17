@@ -1,5 +1,5 @@
 class Document
-  attr_reader :content
+  attr_reader :content, :id
 
   def initialize(hash_args)
     content = hash_args[:content]
@@ -9,6 +9,13 @@ class Document
       @terms = nil
     else
       raise ArgumentError, "text cannot be nil or blank"
+    end
+
+    id = hash_args[:id]
+    if id && !id.nil?
+      @id = id
+    else
+      @id = self.object_id
     end
   end
 

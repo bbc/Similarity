@@ -6,6 +6,18 @@ class TestDocument < Test::Unit::TestCase
     assert_equal document.content, "The quick brown fox"
   end
 
+  def test_initialize_with_id
+    document = Document.new(:content => "The quick brown fox", :id => "new")
+    assert_equal document.content, "The quick brown fox"
+    assert_equal document.id, "new"
+  end
+
+  def test_initialize_with_no_id
+    document = Document.new(:content => "The quick brown fox")
+    assert_equal document.content, "The quick brown fox"
+    assert_equal document.id, document.object_id
+  end
+
   def test_initialize_with_nil
     assert_raise(ArgumentError) { Document.new(:content => nil) }
   end

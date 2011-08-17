@@ -1,7 +1,7 @@
 require 'gsl'
 
 class Corpus
-  attr_reader :terms
+  attr_reader :terms, :documents
 
   def initialize
     @terms = {}

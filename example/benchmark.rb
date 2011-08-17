@@ -13,12 +13,8 @@ require 'similarity'
 def calculate_similarites(number_of_documents)
   corpus = Corpus.new
 
-  # Generate 100 random documents
-  documents = []
-
   number_of_documents.times do
-    document = Document.new(Faker::Lorem.paragraphs.join(' '))
-    documents << document
+    document = Document.new(:content => Faker::Lorem.paragraphs.join(' '))
     corpus << document
   end
 

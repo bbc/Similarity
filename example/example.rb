@@ -21,13 +21,9 @@ headlines = [
              "UK charities step up Somalia aid"
             ]
 
-documents = []
 headlines.each do |headline|
   # create a document object from the headline
-  document = Document.new(headline)
-
-  # store the document object for later
-  documents << document
+  document = Document.new(:content => headline)
 
   # add the document to the corpus
   corpus << document
