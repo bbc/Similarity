@@ -38,25 +38,18 @@ class Corpus
   end
 
   def similarity_matrix
-    term_document_matrix.transpose * term_document_matrix
+    if @similarity_matrix
+      return @similarity_matrix
+    else
+      @similarity_matrix = term_document_matrix.similarity_matrix
+    end
   end
 
   def term_document_matrix
     if @term_document_matrix
       return @term_document_matrix
     else
-      @term_document_matrix = GSL::Matrix.alloc(@terms.size, document_count)
-
-      @documents.each_with_index do |document, document_index|
-        @terms.each_with_index do |term, term_index|
-          term = term.first
-          idf = inverse_document_frequency(term)
-          weight = document.term_frequency(term) * idf
-          @term_document_matrix[term_index, document_index] = weight
-        end
-      end
-
-      @term_document_matrix.each_col { |col| col.div!(col.norm) }
+      @term_document_matrix = TermDocumentMatrix.new(self)
     end
   end
 

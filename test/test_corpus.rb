@@ -70,17 +70,12 @@ class TestCorpus < Test::Unit::TestCase
     assert doc1_weights.first[1] > doc1_weights.last[1]
   end
 
-  # using worked example from log book, this should return a similarity of 1
-  def test_similarity_matrix
+  def test_term_frequency_matrix
     corpus = Corpus.new
-    doc1 = Document.new(:content => "cow horse sheep")
-    doc2 = Document.new(:content => "horse bird dog")
+    corpus << Document.new(:content => "cow horse sheep")
+    corpus << Document.new(:content => "horse bird dog")
 
-    corpus << doc1
-    corpus << doc2
-
-    matrix = corpus.similarity_matrix
-    assert_in_delta 1, matrix[0,0], 0.1
-    assert_in_delta 1, matrix[0,1], 0.1
+    tdm = corpus.term_document_matrix
+    assert tdm.instance_of? TermDocumentMatrix
   end
 end
