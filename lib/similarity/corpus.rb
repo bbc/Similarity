@@ -24,6 +24,16 @@ class Corpus
     @documents << document
   end
 
+  def remove_infrequent_terms!(percentage)
+    number_of_docs = document_count.to_f
+    @terms = terms.delete_if {|term, count| (count.to_f / number_of_docs) < percentage}
+  end
+
+  def remove_frequent_terms!(percentage)
+    number_of_docs = document_count.to_f
+    @terms = terms.delete_if {|term, count| (count.to_f / number_of_docs) > percentage}
+  end
+
   def inverse_document_frequency(term)
     puts "#{document_count} / (1 + #{document_count_for_term(term)})" if $DEBUG
     Math.log(document_count.to_f / (1 + document_count_for_term(term)))

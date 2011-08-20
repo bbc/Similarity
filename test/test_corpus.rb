@@ -78,4 +78,32 @@ class TestCorpus < Test::Unit::TestCase
     tdm = corpus.term_document_matrix
     assert tdm.instance_of? TermDocumentMatrix
   end
+
+  def test_remove_infrequent_terms
+    corpus = Corpus.new
+    corpus << Document.new(:content => "cow horse sheep")
+    corpus << Document.new(:content => "horse bird dog")
+
+    assert_equal 5, corpus.terms.size
+
+    # horse appears in 100% of documents so is kept
+    corpus.remove_infrequent_terms!(0.6)
+
+    assert_equal 1, corpus.terms.size
+    assert corpus.terms.has_key? "horse"
+  end
+
+  def test_remove_frequent_terms
+    corpus = Corpus.new
+    corpus << Document.new(:content => "cow horse sheep")
+    corpus << Document.new(:content => "horse bird dog")
+
+    assert_equal 5, corpus.terms.size
+
+    # horse appears in 100% of documents so is removed
+    corpus.remove_frequent_terms!(0.6)
+
+    assert_equal 4, corpus.terms.size
+    assert !corpus.terms.has_key?("horse")
+  end
 end
