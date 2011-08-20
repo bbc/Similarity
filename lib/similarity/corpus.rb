@@ -7,6 +7,7 @@ class Corpus
     @terms = {}
     @documents = []
     @term_document_matrix = nil
+    @similarity_matrix = nil
   end
 
   def document_count
@@ -27,11 +28,15 @@ class Corpus
   def remove_infrequent_terms!(percentage)
     number_of_docs = document_count.to_f
     @terms = terms.delete_if {|term, count| (count.to_f / number_of_docs) < percentage}
+    @term_document_matrix = nil
+    @similarity_matrix = nil
   end
 
   def remove_frequent_terms!(percentage)
     number_of_docs = document_count.to_f
     @terms = terms.delete_if {|term, count| (count.to_f / number_of_docs) > percentage}
+    @term_document_matrix = nil
+    @similarity_matrix = nil
   end
 
   def inverse_document_frequency(term)
