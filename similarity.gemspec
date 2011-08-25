@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = %q{similarity}
-  s.version = "0.2.3"
+  s.version = "0.2.4"
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Lowis"]
   s.date = %q{2011-05-25}
   s.description = <<-EOT
-Pure-ruby document similarity calculations using cosine similarity and TF-IDF weights
+Document similarity calculations using cosine similarity and TF-IDF weights
 EOT
   s.email = %q{chris.lowis@bbc.co.uk}
   s.files = Dir["lib/**/*"]
