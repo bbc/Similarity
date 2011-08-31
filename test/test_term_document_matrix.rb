@@ -16,4 +16,33 @@ class TestTermDocumentMatrix < Test::Unit::TestCase
     assert_in_delta 1, similarity_matrix[0,0], 0.1
     assert_in_delta 1, similarity_matrix[0,1], 0.1
   end
+
+  def test_number_of_terms
+    corpus = Corpus.new
+    corpus << Document.new(:content => "cow horse sheep")
+    corpus << Document.new(:content => "horse bird dog")
+
+    tdm = TermDocumentMatrix.new(corpus)
+
+    assert_equal 5, tdm.number_of_terms
+  end
+
+  def test_number_of_documents
+    corpus = Corpus.new
+    corpus << Document.new(:content => "cow horse sheep")
+    corpus << Document.new(:content => "horse bird dog")
+
+    tdm = TermDocumentMatrix.new(corpus)
+
+    assert_equal 2, tdm.number_of_documents
+  end
+
+  def test_non_zeros
+    corpus = Corpus.new
+    corpus << Document.new(:content => "cow horse sheep")
+    corpus << Document.new(:content => "horse bird dog")
+
+    tdm = TermDocumentMatrix.new(corpus)
+    assert_equal 2, tdm.non_zeros
+  end
 end
