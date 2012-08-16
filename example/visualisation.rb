@@ -42,7 +42,7 @@ headlines.each do |headline|
 end
 
 # Print a count of unique terms extracted from the documents
-puts "Total number of tems in the corpus: #{corpus.terms.size}"
+puts "Total number of items in the corpus: #{corpus.terms.size}"
 
 # Generate a GraphViz graph to hold the results
 g = GraphViz.new( :G, :type => :graph )
