@@ -49,9 +49,6 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_similar_documents
     corpus = Corpus.new
-    # doc1 = Document.new(:content => "cow horse sheep")
-    # doc2 = Document.new(:content => "horse bird dog")
-    # doc3 = Document.new(:content => "pig pigeon panther")
     doc1 = Document.new(:content => "bird bird bird")
     doc2 = Document.new(:content => "pig pig pig bird")
     doc3 = Document.new(:content => "horse horse bird bird")
