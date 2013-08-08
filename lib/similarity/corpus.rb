@@ -68,6 +68,17 @@ class Corpus
     end
   end
 
+  def similar_documents(document)
+    index = documents.index(document)
+    return nil if index.nil?
+
+    results = documents.each_with_index.map do |doc, doc_index|
+      similarity = similarity_matrix[index, doc_index]
+      [doc, similarity]
+    end
+    results.sort { |a,b| b.last <=> a.last }
+  end
+
   def weights(document)
     idx = @documents.index(document)
     terms = @terms.to_a.map {|term| term.first}

@@ -47,6 +47,25 @@ class TestCorpus < Test::Unit::TestCase
     assert_in_delta corpus.inverse_document_frequency("bird"), 0.693, 0.001
   end
 
+  def test_similar_documents
+    corpus = Corpus.new
+    doc1 = Document.new(:content => "bird bird bird")
+    doc2 = Document.new(:content => "pig pig pig bird")
+    doc3 = Document.new(:content => "horse horse bird bird")
+
+    corpus << doc1
+    corpus << doc2
+    corpus << doc3
+
+    # it returns nil if the document isn't in the corpus
+    assert_nil corpus.similar_documents("this is not a valid document")
+
+    # it returns an array of the documents in order of similarity
+    results = corpus.similar_documents(doc1)
+    assert_equal [doc1, doc3, doc2], results.map(&:first)
+    assert_equal [1.0, 0.579, 0.230], results.map { |r| r.last.round(3) }
+  end
+
   def test_weights
     corpus = Corpus.new
     doc1 = Document.new(:content => "cow horse sheep")
