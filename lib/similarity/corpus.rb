@@ -4,7 +4,7 @@ class Corpus
   attr_reader :terms, :documents
 
   def initialize
-    @terms = {}
+    @terms = Hash.new(0)
     @documents = []
     @term_document_matrix = nil
     @similarity_matrix = nil
@@ -15,13 +15,8 @@ class Corpus
   end
 
   def <<(document)
-    document.terms.uniq.each do |term|
-      if @terms[term]
-        @terms[term] += 1
-      else
-        @terms[term] = 1
-      end
-    end
+    document.terms.uniq.each { |term| @terms[term] += 1 }
+
     @documents << document
   end
 
@@ -45,11 +40,7 @@ class Corpus
   end
 
   def document_count_for_term(term)
-    if @terms[term]
-      @terms[term]
-    else
-      0
-    end
+    @terms[term]
   end
 
   def similarity_matrix
