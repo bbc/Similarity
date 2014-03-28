@@ -30,24 +30,16 @@ class Document
   end
 
   def calculate_term_frequencies
-    tf = {}
-    terms.each do |term|
-      if tf[term]
-        tf[term] += 1
-      else
-        tf[term] = 1
-      end
-    end
+    tf = Hash.new(0)
+
+    terms.each { |term| tf[term] += 1 }
+
     total_number_of_terms = terms.size.to_f
     tf.each_pair { |k,v| tf[k] = (tf[k] / total_number_of_terms) }
   end
 
   def term_frequency(term)
-    if tf = term_frequencies[term]
-      tf
-    else
-      0
-    end
+    term_frequencies[term]
   end
 
   def has_term?(term)
