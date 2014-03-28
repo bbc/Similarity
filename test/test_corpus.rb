@@ -3,8 +3,8 @@ require 'helper'
 class TestCorpus < Test::Unit::TestCase
   def test_adding_documents_increments_document_count
     corpus = Corpus.new
-    doc1 = Document.new(:content => "cow cow cow")
-    doc2 = Document.new(:content => "horse horse horse")
+    doc1 = Document.new("cow cow cow")
+    doc2 = Document.new("horse horse horse")
 
     corpus << doc1
     corpus << doc2
@@ -14,8 +14,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_adding_documents_adds_terms
     corpus = Corpus.new
-    doc1 = Document.new(:content => "cow cow cow bird")
-    doc2 = Document.new(:content => "horse horse horse bird")
+    doc1 = Document.new("cow cow cow bird")
+    doc2 = Document.new("horse horse horse bird")
 
     corpus << doc1
     corpus << doc2
@@ -34,8 +34,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_inverse_document_frequency
     corpus = Corpus.new
-    doc1 = Document.new(:content => "cow cow cow")
-    doc2 = Document.new(:content => "horse horse horse")
+    doc1 = Document.new("cow cow cow")
+    doc2 = Document.new("horse horse horse")
 
     corpus << doc1
     corpus << doc2
@@ -49,9 +49,9 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_similar_documents
     corpus = Corpus.new
-    doc1 = Document.new(:content => "bird bird bird")
-    doc2 = Document.new(:content => "pig pig pig bird")
-    doc3 = Document.new(:content => "horse horse bird bird")
+    doc1 = Document.new("bird bird bird")
+    doc2 = Document.new("pig pig pig bird")
+    doc3 = Document.new("horse horse bird bird")
 
     corpus << doc1
     corpus << doc2
@@ -68,8 +68,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_weights
     corpus = Corpus.new
-    doc1 = Document.new(:content => "cow horse sheep")
-    doc2 = Document.new(:content => "horse bird dog")
+    doc1 = Document.new("cow horse sheep")
+    doc2 = Document.new("horse bird dog")
 
     corpus << doc1
     corpus << doc2
@@ -79,9 +79,9 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_weights_sorts
     corpus = Corpus.new
-    doc1 = Document.new(:content => "Returns a string containing a representation")
-    corpus << Document.new(:content => "Adds a string containing a representation")
-    corpus << Document.new(:content => "Representation of a string")
+    doc1 = Document.new("Returns a string containing a representation")
+    corpus << Document.new("Adds a string containing a representation")
+    corpus << Document.new("Representation of a string")
 
     corpus << doc1
 
@@ -91,8 +91,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_term_frequency_matrix
     corpus = Corpus.new
-    corpus << Document.new(:content => "cow horse sheep")
-    corpus << Document.new(:content => "horse bird dog")
+    corpus << Document.new("cow horse sheep")
+    corpus << Document.new("horse bird dog")
 
     tdm = corpus.term_document_matrix
     assert tdm.instance_of? TermDocumentMatrix
@@ -100,8 +100,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_remove_infrequent_terms
     corpus = Corpus.new
-    corpus << Document.new(:content => "cow horse sheep")
-    corpus << Document.new(:content => "horse bird dog")
+    corpus << Document.new("cow horse sheep")
+    corpus << Document.new("horse bird dog")
 
     assert_equal 5, corpus.terms.size
 
@@ -114,8 +114,8 @@ class TestCorpus < Test::Unit::TestCase
 
   def test_remove_frequent_terms
     corpus = Corpus.new
-    corpus << Document.new(:content => "cow horse sheep")
-    corpus << Document.new(:content => "horse bird dog")
+    corpus << Document.new("cow horse sheep")
+    corpus << Document.new("horse bird dog")
 
     assert_equal 5, corpus.terms.size
 

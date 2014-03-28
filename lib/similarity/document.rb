@@ -1,22 +1,17 @@
 class Document
   attr_reader :content, :id
 
-  def initialize(hash_args)
-    content = hash_args[:content]
+  def initialize(content, id = nil)
     if content && !content.empty?
       @content = content
-      @term_frequency = nil
-      @terms = nil
     else
       raise ArgumentError, "text cannot be nil or blank"
     end
 
-    id = hash_args[:id]
-    if id && !id.nil?
-      @id = id
-    else
-      @id = self.object_id
-    end
+    @term_frequency = nil
+    @terms = nil
+
+    @id = id ? id : self.object_id
   end
 
   def terms

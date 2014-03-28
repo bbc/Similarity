@@ -2,52 +2,52 @@ require 'helper'
 
 class TestDocument < Test::Unit::TestCase
   def test_initialize
-    document = Document.new(:content => "The quick brown fox")
+    document = Document.new("The quick brown fox")
     assert_equal document.content, "The quick brown fox"
   end
 
   def test_initialize_with_id
-    document = Document.new(:content => "The quick brown fox", :id => "new")
+    document = Document.new("The quick brown fox", "new")
     assert_equal document.content, "The quick brown fox"
     assert_equal document.id, "new"
   end
 
   def test_initialize_with_no_id
-    document = Document.new(:content => "The quick brown fox")
+    document = Document.new("The quick brown fox")
     assert_equal document.content, "The quick brown fox"
     assert_equal document.id, document.object_id
   end
 
   def test_initialize_with_nil
-    assert_raise(ArgumentError) { Document.new(:content => nil) }
+    assert_raise(ArgumentError) { Document.new(nil) }
   end
 
   def test_initialize_with_blank
-    assert_raise(ArgumentError) { Document.new(:content => "") }
+    assert_raise(ArgumentError) { Document.new("") }
   end
 
   def test_term_extraction
-    document = Document.new(:content => "the quick brown fox")
+    document = Document.new("the quick brown fox")
     assert_equal document.terms, ["the", "quick", "brown", "fox"]
   end
 
   def test_term_extraction_removes_spaces
-    document = Document.new(:content => "the quick     brown   fox")
+    document = Document.new("the quick     brown   fox")
     assert_equal document.terms, ["the", "quick", "brown", "fox"]
   end
 
   def test_term_extraction_downcases
-    document = Document.new(:content => "The Quick Brown Fox")
+    document = Document.new("The Quick Brown Fox")
     assert_equal document.terms, ["the", "quick", "brown", "fox"]
   end
 
   def test_term_extraction_removes_punctuation
-    document = Document.new(:content => 'The, Quick! Brown. "Fox"')
+    document = Document.new('The, Quick! Brown. "Fox"')
     assert_equal document.terms, ["the", "quick", "brown", "fox"]
   end
 
   def test_term_frequencies
-    document = Document.new(:content => 'cow cow cow horse horse elephant')
+    document = Document.new('cow cow cow horse horse elephant')
     assert document.term_frequencies.is_a? Hash
 
     # should have 3 terms
@@ -61,7 +61,7 @@ class TestDocument < Test::Unit::TestCase
   end
 
   def test_term_frequency
-    document = Document.new(:content => 'cow cow cow horse horse elephant')
+    document = Document.new('cow cow cow horse horse elephant')
 
     # frequency of cow should be 3/6 = 0.5
     assert_equal document.term_frequency('cow'), 0.5
@@ -71,7 +71,7 @@ class TestDocument < Test::Unit::TestCase
   end
 
   def test_has_term
-    document = Document.new(:content => 'cow cow cow horse horse elephant')
+    document = Document.new('cow cow cow horse horse elephant')
 
     assert_equal true, document.has_term?('cow')
     assert_equal false, document.has_term?('sheep')
