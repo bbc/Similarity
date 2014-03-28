@@ -44,19 +44,11 @@ class Corpus
   end
 
   def similarity_matrix
-    if @similarity_matrix
-      return @similarity_matrix
-    else
-      @similarity_matrix = term_document_matrix.similarity_matrix
-    end
+    @similarity_matrix ||= term_document_matrix.similarity_matrix
   end
 
   def term_document_matrix
-    if @term_document_matrix
-      return @term_document_matrix
-    else
-      @term_document_matrix = TermDocumentMatrix.new(self)
-    end
+    @term_document_matrix ||= TermDocumentMatrix.new(self)
   end
 
   def similar_documents(document)
