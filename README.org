@@ -3,7 +3,7 @@
 ** Overview
 
 A Ruby library for calculating the similarity between pieces of text
-using a [[http://en.wikipedia.org/wiki/Tf%25E2%2580%2593idf][Term Frequency-Inverse Document Frequency]] method.
+using a [[http://en.wikipedia.org/wiki/Tf–idf][Term Frequency-Inverse Document Frequency]] method.
 
 A [[http://en.wikipedia.org/wiki/Bag_of_words_model][bag of words]] model is used. Terms in the source documents are
 downcased and punctuation is removed, but stemming is not currently
