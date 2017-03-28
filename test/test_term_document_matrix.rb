@@ -4,8 +4,8 @@ class TestTermDocumentMatrix < Test::Unit::TestCase
   # using worked example from log book, this should return a similarity of 1
   def test_similarity_matrix
     corpus = Corpus.new
-    doc1 = Document.new(:content => "cow horse sheep")
-    doc2 = Document.new(:content => "horse bird dog")
+    doc1 = Document.new("cow horse sheep")
+    doc2 = Document.new("horse bird dog")
 
     corpus << doc1
     corpus << doc2
@@ -19,8 +19,8 @@ class TestTermDocumentMatrix < Test::Unit::TestCase
 
   def test_number_of_terms
     corpus = Corpus.new
-    corpus << Document.new(:content => "cow horse sheep")
-    corpus << Document.new(:content => "horse bird dog")
+    corpus << Document.new("cow horse sheep")
+    corpus << Document.new("horse bird dog")
 
     tdm = TermDocumentMatrix.new(corpus)
 
@@ -29,8 +29,8 @@ class TestTermDocumentMatrix < Test::Unit::TestCase
 
   def test_number_of_documents
     corpus = Corpus.new
-    corpus << Document.new(:content => "cow horse sheep")
-    corpus << Document.new(:content => "horse bird dog")
+    corpus << Document.new("cow horse sheep")
+    corpus << Document.new("horse bird dog")
 
     tdm = TermDocumentMatrix.new(corpus)
 
@@ -39,8 +39,8 @@ class TestTermDocumentMatrix < Test::Unit::TestCase
 
   def test_non_zeros
     corpus = Corpus.new
-    corpus << Document.new(:content => "cow horse sheep")
-    corpus << Document.new(:content => "horse bird dog")
+    corpus << Document.new("cow horse sheep")
+    corpus << Document.new("horse bird dog")
 
     tdm = TermDocumentMatrix.new(corpus)
     assert_equal 2, tdm.non_zeros
